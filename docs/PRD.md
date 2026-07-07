@@ -114,10 +114,12 @@ Each layer only matters if the one before it is airtight. Broad permissions with
 
 ### 8.3 Permission model
 
-Permissions are tiered rather than all-or-nothing, and default to the narrowest possible scope.
+Permissions are tiered rather than all-or-nothing. Each tier defaults to the narrowest scope that feature actually needs to function, expanding only for deeper capabilities (field structure, sensitive field access) — not the narrowest scope in absolute terms, since the ambient trigger itself has a real technical floor.
 
-**Tier 1: Passive read (default, no prompt needed)**
-Reading visible, non-sensitive text for translation and definition requests. Uses `activeTab`, which Chrome grants temporarily on interaction — no persistent host permission required. Covers most everyday use without ever surfacing a permission dialog.
+**Tier 1: Passive read (default, granted once at install)**
+Reading visible, non-sensitive text so the ambient trigger (floating icon on text selection, on any page) can work at all. This requires a standing content script with broad host permissions (`<all_urls>`), granted as a single upfront prompt at install — the same model used by any text-selection extension (translate-on-select tools, Grammarly, etc.). `activeTab` alone cannot support this, since it only activates on direct interaction with the extension (toolbar click, keyboard shortcut), not on page load or selection events.
+
+This is a deliberate revision from an earlier draft that described Tier 1 as prompt-free via `activeTab`. That framing undersold what the feature actually requires. The privacy claim this product makes is not "the extension can't see your page" — it's that **nothing read is ever transmitted off-device without passing the redaction proxy (8.4), and every transmission is logged (8.5)**. Read access is the standard cost of this category of extension; the transmit boundary is the actual differentiator, and it's enforced in code, not policy.
 
 **Tier 2: Field awareness (first use per site, one-time prompt)**
 Reading form field labels and structure to explain what a field expects. Requires deeper DOM and accessibility tree access on that domain. Prompted once per domain, remembered afterward, revocable anytime.
