@@ -2,10 +2,6 @@
 
 The fastest, most private way to understand what's on your screen right now.
 
-## License
-
-Proprietary. All rights reserved. See [LICENSE](LICENSE).
-
 BrowserBuddy is a browser extension focused on the 2-second question, not the 20-minute task: highlight text or hover a form field and get an instant, private, in-context answer (translate, define, explain, simplify) without opening a sidebar, typing a prompt, or waiting on an agentic workflow.
 
 ## Core principles
@@ -37,3 +33,7 @@ To load the extension locally:
 3. Enable **Developer mode**
 4. Click **Load unpacked** and select the `dist/` folder
 5. Select some text on any page — a small icon should appear near the selection within ~200ms. Open the service worker console from `chrome://extensions` (click "service worker" under the extension) to see the round-trip message log.
+
+## License
+
+Proprietary. All rights reserved. See [LICENSE](LICENSE).
