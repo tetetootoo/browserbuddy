@@ -2,6 +2,7 @@
   "name": "browserbuddy",
   "version": "0.0.1",
   "private": true,
+  "license": "UNLICENSED",
   "description": "Glance (BrowserBuddy): instant, private, in-context browser assistant",
   "type": "module",
   "scripts": {
